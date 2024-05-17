@@ -21,6 +21,3 @@ write: {x 0:{sep/(`k@'x)}' ((,$!y),replacemiss''+.y)}
 / TODO - Notes
 / - Character encoding issue. Sometimes there are few bytes at the beginning
 / - Test with blank cols and empty colnames
-
-
-
