@@ -18,11 +18,21 @@ while running
       res = eval(Meta.parse("$(args[1])=($(repr(args[2])))"))
    elseif cmd == "GET"
       res = eval(Meta.parse(args[1]))
+   elseif cmd == "IMP"
+      # do something when not properly called
+      if length(args) == 1
+         eval(Meta.parse("import $(args[1])"))
+         res = args[1]
+      #=elseif length(args) == 2
+         eval(Meta.parse("import $(args[1]): $(args[2])"))
+         res = args[1:2]=#
+      end
    elseif cmd == "STOP"
       global running
       res = "Bye"
       running = false
    end
+   println(res)
    write(clt, isnothing(res) ? "\n" : json(res) * "\n")
    flush(clt)
 end
