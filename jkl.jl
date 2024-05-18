@@ -19,7 +19,7 @@ while running
    elseif cmd == "IMP"
       # do something when not properly called
       eval(Meta.parse("import $(arg)"))
-      res = arg
+      res = eval(Meta.parse("filter(s->getproperty($arg,s) isa Function,names($arg))"))
    elseif cmd == "STOP"
       global running
       res = "Bye"
