@@ -10,10 +10,10 @@
     jl:  .[<:;`$":",pt;`noconn]
     C: {jl 0:`j@(x;y); r:{$[#x;*x;x]}@0:jl; .[`j?;,r;{"Julia: ",$r}]}                               / try to condense I and O in the communication with Julia server
 
-    s: {C["STOP"]`}
-    p: C["PUT"]
-    x: C["X"]
-    i: C["IMP"]
+    s: {C[`STOP]`}
+    p: C[`PUT]
+    x: C[`X]
+    i: C[`IMP]
 
 \d .
 
@@ -23,3 +23,7 @@
 / implement "function imports" from k
 / make use of symbols over strings when possible
 / - after json parsing, cast the data to the most specific type
+
+
+/ Notes
+/ Julia's json gives matrices by cols. Do we need to fix this?
