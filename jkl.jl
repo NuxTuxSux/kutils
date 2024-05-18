@@ -9,24 +9,17 @@ clt = accept(srv)
 
 running = true
 while running
-   cmd, args... = JSON.parse(readline(clt))
+   cmd, arg = JSON.parse(readline(clt))
 
    res = nothing
    if cmd == "X"
-      res = eval(Meta.parse(args[1]))
+      res = eval(Meta.parse(arg))
    elseif cmd == "PUT"
-      res = eval(Meta.parse("$(args[1])=($(repr(args[2])))"))
-   elseif cmd == "GET"
-      res = eval(Meta.parse(args[1]))
+      res = eval(Meta.parse("$(arg[1])=($(repr(arg[2])))"))
    elseif cmd == "IMP"
       # do something when not properly called
-      if length(args) == 1
-         eval(Meta.parse("import $(args[1])"))
-         res = args[1]
-      #=elseif length(args) == 2
-         eval(Meta.parse("import $(args[1]): $(args[2])"))
-         res = args[1:2]=#
-      end
+      eval(Meta.parse("import $(arg)"))
+      res = arg
    elseif cmd == "STOP"
       global running
       res = "Bye"
