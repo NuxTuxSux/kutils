@@ -3,6 +3,8 @@
 using Sockets, JSON
 const PORT = parse(Int, ARGS[1])
 
+cast(x) = x isa Array ? cast.(x) : convert(typeof(x),x)
+
 srv = listen(PORT)#, backlog = 0)
 
 clt = accept(srv)
@@ -12,15 +14,15 @@ while running
    cmd, arg = JSON.parse(readline(clt))
 
    res = nothing
-   if cmd == "X"
+   if cmd == "EXC"
       res = eval(Meta.parse(arg))
    elseif cmd == "PUT"
-      res = eval(Meta.parse("$(arg[1])=($(repr(arg[2])))"))
+      res = cast(eval(Meta.parse("$(arg[1])=($(repr(arg[2])))")))
    elseif cmd == "IMP"
       # do something when not properly called
       eval(Meta.parse("import $(arg)"))
       res = eval(Meta.parse("filter(s->getproperty($arg,s) isa Function,names($arg))"))
-   elseif cmd == "STOP"
+   elseif cmd == "STP"
       global running
       res = "Bye"
       running = false
