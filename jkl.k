@@ -15,8 +15,8 @@
     e: C[`EXC]
 
     fn: {$[1=#x;$x;"."/$x]}                                                                         /   `LinearAlgebra`transpose -> "LinearAlgebra.transpose"
-    fc: {[nm;as]e (fn@nm),"(JSON.parse(\"",(`j@as),"\"))"}                                          /   julia function's "symbol path" (see above) -> k wrapper function
-    i: {nms!(,x),/:nms:`$C[`IMP]x}                                                               /   ~~BUG~~
+    fc: {[nm]{e (fn@x),"(JSON.parse(\"",(`j@y),"\"))"}[nm]}                                         /   julia function's "symbol path" (see above) -> k wrapper function
+    i: {fc'nms!(,x),/:nms:`$C[`IMP]x}                                                               /   gives the package as a dict of k wrapper functions over its functions
 
 \d .
 
