@@ -10,9 +10,8 @@ cast(x) = x isa Array ? cast.(x) : convert(typeof(x),x)
 # returns a julia proper array
 # e.g.
 # v = ["n",
-#     ["f",[1,2,3],[4,5,6]],
-#     ["f",[1,-2,3],[-4,-3,6]],
-#     ]
+#      ["f",[1,2,3],[4,5,6]],
+#      ["f",[1,-2,3],[-4,-3,6]]]
 
 nest(x) = if x isa Array
     if first(x) == "n"
@@ -24,7 +23,7 @@ else
     x
 end
 
-srv = listen(PORT)#, backlog = 0)
+srv = listen(PORT)
 
 clt = accept(srv)
 
@@ -34,7 +33,7 @@ while running
 
    res = nothing
    if cmd == "EXC"
-      res = eval(Meta.parse(arg)) # fix
+       res = eval(Meta.parse(arg))
    elseif cmd == "PUT"
       res = eval(Meta.parse("$(arg[1])=nest($(repr(arg[2])))"))
    elseif cmd == "IMP"
