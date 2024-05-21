@@ -3,8 +3,8 @@
 using Sockets, JSON
 const PORT = parse(Int, ARGS[1])
 
-
-cast(x) = x isa Array ? cast.(x) : convert(typeof(x),x)
+# Not used anymore
+# cast(x) = x isa Array ? cast.(x) : convert(typeof(x),x)
 
 # Receives an array of arrays w/ nested-flat annotations
 # returns a julia proper array
@@ -29,27 +29,28 @@ clt = accept(srv)
 
 running = true
 while running
-   cmd, arg = JSON.parse(readline(clt))
-
-   res = nothing
-   if cmd == "EXC"
-       res = eval(Meta.parse(arg))
-   elseif cmd == "PUT"
-      res = eval(Meta.parse("$(arg[1])=nest($(repr(arg[2])))"))
-   elseif cmd == "IMP"
-      # do something when not properly called
-      eval(Meta.parse("import $(arg)"))
-      res = eval(Meta.parse("filter(s->getproperty($arg,s) isa Function,names($arg))"))
-   elseif cmd == "CLL"
-      res = eval(Meta.parse("$(arg[1])(nest($(arg[2])))"))   # test
-   elseif cmd == "STP"
-      global running
-      res = "Bye"
-      running = false
-   end
-   println(res)
-   write(clt, isnothing(res) ? "\n" : json(res) * "\n")
-   flush(clt)
+    cmd, arg = JSON.parse(readline(clt))
+    println("cmd:\t$cmd")
+    println("arg:\t$arg")
+    res = nothing
+    if cmd == "EXC"
+        res = eval(Meta.parse(arg))
+    elseif cmd == "PUT"
+        res = eval(Meta.parse("$(arg[1])=nest($(repr(arg[2])))"))
+    elseif cmd == "IMP"
+        # do something when not properly called
+        eval(Meta.parse("import $(arg)"))
+        res = eval(Meta.parse("filter(s->getproperty($arg,s) isa Function,names($arg))"))
+    elseif cmd == "CLL"
+        res = eval(Meta.parse("$(arg[1])(nest($(repr(arg[2]))))"))
+    elseif cmd == "STP"
+        global running
+        res = "Bye"
+        running = false
+    end
+    println(res)
+    write(clt, isnothing(res) ? "\n" : json(res) * "\n")
+    flush(clt)
 end
 
 close(clt)
@@ -69,6 +70,7 @@ close(clt)
 
 
 # TODO
+# - (maybe) simplify nestflat annotation. No annotation needed if all elements are scalars
 # - fix EXC to handle knested jsons
 # - handle julia errors - connection should stay alive and return jsoned
 #  julia error (which I should unpack in k to throw a k error)
