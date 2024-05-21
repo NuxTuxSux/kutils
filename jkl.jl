@@ -3,7 +3,26 @@
 using Sockets, JSON
 const PORT = parse(Int, ARGS[1])
 
+
 cast(x) = x isa Array ? cast.(x) : convert(typeof(x),x)
+
+# Receives an array of arrays w/ nested-flat annotations
+# returns a julia proper array
+# e.g.
+# v = ["n",
+#     ["f",[1,2,3],[4,5,6]],
+#     ["f",[1,-2,3],[-4,-3,6]],
+#     ]
+
+nest(x) = if x isa Array
+    if first(x) == "n"
+        nest.(x[2:end])
+    else
+        stack(nest.(x[2:end]))
+    end
+else
+    x
+end
 
 srv = listen(PORT)#, backlog = 0)
 
@@ -15,13 +34,15 @@ while running
 
    res = nothing
    if cmd == "EXC"
-      res = eval(Meta.parse(arg))
+      res = eval(Meta.parse(arg)) # fix
    elseif cmd == "PUT"
-      res = cast(eval(Meta.parse("$(arg[1])=($(repr(arg[2])))")))
+      res = eval(Meta.parse("$(arg[1])=nest($(repr(arg[2])))"))
    elseif cmd == "IMP"
       # do something when not properly called
       eval(Meta.parse("import $(arg)"))
       res = eval(Meta.parse("filter(s->getproperty($arg,s) isa Function,names($arg))"))
+   elseif cmd == "CLL"
+      res = eval(Meta.parse("$(arg[1])(nest($(arg[2])))"))   # test
    elseif cmd == "STP"
       global running
       res = "Bye"
@@ -49,5 +70,6 @@ close(clt)
 
 
 # TODO
+# - fix EXC to handle knested jsons
 # - handle julia errors - connection should stay alive and return jsoned
 #  julia error (which I should unpack in k to throw a k error)
