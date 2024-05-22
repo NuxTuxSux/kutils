@@ -7,10 +7,9 @@
    st[]
    ."\\sleep 2"                                                                                 /   server is not ready yet, as `x is non blocking
 
-   cn: {.[<:;`$":",pt;`noconn]}
-   jl: cn[]
    C: {jl 0:`j@(x;y); r:{$[#x;*x;x]}@0:jl; .[`j?;,r;{"Julia: ",$r}]}                            /   try to condense I and O in the communication with Julia server
 
+   cn: {jl::.[<:;`$":",pt;`noconn]}
    dn: {C[`STP]`}
    p: C[`PUT]
    e: C[`EXC]
@@ -20,6 +19,7 @@
    fc: {[nm]{c(fn x;y)}[nm]}                                                                    /   julia function's "symbol path" (see above) -> k wrapper function
    i: {fc'nms!(,x),/:nms:`$C[`IMP]x}                                                            /   gives the package as a dict of k wrapper functions over its functions
 
+   cn[]
 \d .
 
 
