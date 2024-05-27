@@ -8,9 +8,10 @@ c: ("0 1";"2 3";"4 5")
 d: ("0 1 2 3";"4 5 6 7")
 M: ((,"3 4 5 9 8 4 3";("0 1 2 3 4";"5 6 7 8 9"));(("0 1";"2 3";"4 5");("0 1 2 3";"4 5 6 7")))
 
-in:(0>*/5 10-\:)   	      	      	    	      	    	  	      	    / exclusive interval
+   	      
+in:{(z<y)&z>x}									    / exclusive interval
 b2i:{x+256*0>x}									    / byte(s) to int - solves issue about neg numbs w/ chars over 127
-ulen:+/~in[127;192]b2i								    / length of utf8 str - discards data bytes and counts just initiators 
+ulen:+/~in[127;192]b2i@								    / length of utf8 str - discards data bytes and counts just initiators 
 
 mshp:{(#x),ulen@*x}						  	    	    / shape of a char matrix
 
@@ -28,6 +29,6 @@ draw: {cs@2/|/+2\cs?/:(x;y)}							    / takes two borders vec giving their supe
 hcat:{(-3_'x),'draw[-3#'x;3#'y],'(3_'y)}					    / horizontally concat of two char matrices - superpose borders when needed
 vcat:{(-1_x),(,,/draw[0N 3#*|x;0N 3#*y]),1_y}					    / see above
 
-/ `0:vcatc/hcatc/'box''mpad''[confsz@M;M]					    / usage example - make this into a function to show a matrix of tiles
+/ `0:vcat/hcat/'box''mpad''[confsz@M;M]					    / usage example - make this into a function to show a matrix of tiles
 
 
