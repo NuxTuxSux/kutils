@@ -1,4 +1,26 @@
-/ dati di esempio
+in:{(z<y)&z>x}                                                                      / exclusive interval
+b2i:{x+256*0>x}                                                                     / byte(s) to int - solves issue about neg numbs w/ chars over 127
+ulen:+/~in[127;192]b2i@                                                             / length of utf8 str - discards data bytes and counts just initiators 
+mshp:{(#x),ulen@*x}                                                                 / shape of a char matrix
+mpad:{(r;c):x-mshp@y;(y,\:c#" "),r#,(x@1)#" "}                                      / (right/down) space padding of a char matrix
+confsz:,/:\:/|/''{(*''x;+(*|)''x)}@mshp''                                           / gives conformed sizes for each tile in a tiles matrix
+cs:0N 3#"\0\0 \0\0r\0\0u╰\0\0l─╯┴\0\0d╭│├╮┬┤┼"                                      / line chrs put in the right order to enable bit-controlled superposition.
+                                                                                    / In "(cs@2/) r u l d" r, u, l and d are the bits telling presence of each segmentlet
+box:{l:*[*|mshp@x;3]#"─";,/(,"╭",l,"╮";"│",/:x,\:"│";,"╰",l,"╯")}                   / draws a box around a chr matrix
+draw:{cs@2/|/+2\cs?/:(x;y)}                                                         / takes two borders vec giving their superposition
+hcat:{(-3_'x),'draw[-3#'x;3#'y],'(3_'y)}                                            / horizontally concat of two char matrices - superpose borders when needed
+vcat:{(-1_x),(,,/draw[0N 3#*|x;0N 3#*y]),1_y}                                       / see above
+
+/ `0:vcat/hcat/'box''mpad''[confsz@M;M]                                             / usage example - make this into a function to show a matrix of tiles
+
+
+
+/ -- OLD - squared boxes ------------------------
+/ cs:0N 3#"\0\0 \0\0r\0\0u└\0\0l─┘┴\0\0d┌│├┐┬┤┼"
+/ box:{l:*[*|mshp@x;3]#"─";,/(,"┌",l,"┐";"│",/:x,\:"│";,"└",l,"┘")}
+
+/ -- test data ----------------------------------
+
 A:(10#" "),`c$"A"+!26
 bs:+{3 4#100?A}@/:/:3 2#0
 
@@ -8,27 +30,10 @@ c: ("0 1";"2 3";"4 5")
 d: ("0 1 2 3";"4 5 6 7")
 M: ((,"3 4 5 9 8 4 3";("0 1 2 3 4";"5 6 7 8 9"));(("0 1";"2 3";"4 5");("0 1 2 3";"4 5 6 7")))
 
-   	      
-in:{(z<y)&z>x}									    / exclusive interval
-b2i:{x+256*0>x}									    / byte(s) to int - solves issue about neg numbs w/ chars over 127
-ulen:+/~in[127;192]b2i@								    / length of utf8 str - discards data bytes and counts just initiators 
-
-mshp:{(#x),ulen@*x}						  	    	    / shape of a char matrix
-
-mpad:{(r;c):x-mshp@y;(y,\:c#" "),r#,(x@1)#" "}			  	     	    / (right/down) space padding of a char matrix
-
-confsz:,/:\:/|/''{(*''x;+(*|)''x)}@mshp''   					    / gives conformed sizes for each tile in a tiles matrix
-
-cs:0N 3#"\0\0 \0\0r\0\0u└\0\0l─┘┴\0\0d┌│├┐┬┤┼"					    / line chrs put in the right order to enable bit-controlled superposition.
-      	      						       	    	       	    / In "(cs@2/) r u l d" r, u, l and d are the bits telling presence of each segmentlet
-
-box:{l:*[*|mshp@x;3]#"─";,/(,"┌",l,"┐";"│",/:x,\:"│";,"└",l,"┘")}		    / draws a box around a chr matrix
-
-draw: {cs@2/|/+2\cs?/:(x;y)}							    / takes two borders vec giving their superposition
-
-hcat:{(-3_'x),'draw[-3#'x;3#'y],'(3_'y)}					    / horizontally concat of two char matrices - superpose borders when needed
-vcat:{(-1_x),(,,/draw[0N 3#*|x;0N 3#*y]),1_y}					    / see above
-
-/ `0:vcat/hcat/'box''mpad''[confsz@M;M]					    / usage example - make this into a function to show a matrix of tiles
+B:vcat/hcat/'box''mpad''[confsz@bs;bs]
+C:((a;b);(c;d))
+C1:vcat/hcat/'box''mpad''[confsz@C;C]
+C2:((C1;bs);(bs;C))
+C2:((C1;B);(B;C1))
 
 
