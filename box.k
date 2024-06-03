@@ -1,6 +1,8 @@
 in:{(z<y)&z>x}                                                                      / exclusive interval
 b2i:{x+256*0>x}                                                                     / byte(s) to int - solves issue about neg numbs w/ chars over 127
-ulen:+/~in[127;192]b2i@                                                             / length of utf8 str - discards data bytes and counts just initiators 
+ulen:+/~in[127;192]b2i@                                                             / length of utf8 str - discards data bytes and counts just initiators
+utake:{{z;(x+1)>+\~in[127;192]b2i@y}[x;y]#y}                                        / take x unicode chars from y - uses z for K combinator
+udd:{$[x<ulen@y;utake[x-2;y],"..";y]}                                               / cut long unicode lines taking x uchar inserting ".."
 mshp:{(#x),ulen@*x}                                                                 / shape of a char matrix
 mpad:{(r;c):x-mshp@y;(y,\:c#" "),r#,(x@1)#" "}                                      / (right/down) space padding of a char matrix
 confsz:,/:\:/|/''{(*''x;+(*|)''x)}@mshp''                                           / gives conformed sizes for each tile in a tiles matrix
@@ -11,13 +13,21 @@ draw:{cs@2/|/+2\cs?/:(x;y)}                                                     
 hcat:{(-3_'x),'draw[-3#'x;3#'y],'(3_'y)}                                            / horizontally concat of two char matrices - superpose borders when needed
 vcat:{(-1_x),(,,/draw[0N 3#*|x;0N 3#*y]),1_y}                                       / see above
 
-/ `0:vcat/hcat/'box''mpad''[confsz@M;M]                                             / usage example - make this into a function to show a matrix of tiles
+matsh:{vcat/hcat/'box''mpad''[confsz@x;x]}                                          / accepts a matrix of char tiles
+
+/ shape:{$[|/`A`F`I`S=@x;$[1=#ts:?o'x;,[;*ts];::](#x);!0]}
+/ show:{t:@x;$[|/`C`c`F`I`i`S`s=t;,`k@x;`A~t;hcat/box','`k'x;`nyi]}
+/ ashow:{$[`A~@x;$[1=#?@'x;matsh@,''`k''x;hcat/box'ashow'x];`k@x]}
+ashow:{$[`A~@x;$[1=#?@'x;matsh@o''x;hcat/box'ashow'x];,`k@x]}
 
 
 
-/ -- OLD - squared boxes ------------------------
-/ cs:0N 3#"\0\0 \0\0r\0\0u└\0\0l─┘┴\0\0d┌│├┐┬┤┼"
-/ box:{l:*[*|mshp@x;3]#"─";,/(,"┌",l,"┐";"│",/:x,\:"│";,"└",l,"┘")}
+/ lim:{(x<ulen@y)(x#)/y}                                                            / adapt to ucode - avoid calculating str repr for big array
+
+
+
+
+
 
 / -- test data ----------------------------------
 
