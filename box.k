@@ -16,16 +16,15 @@ vcat:{(-1_x),(,,/draw[0N 3#*|x;0N 3#*y]),1_y}                                   
 matsh:{vcat/hcat/'box''mpad''[confsz@x;x]}                                          / accepts a matrix of char tiles
 
 / shape:{$[|/`A`F`I`S=@x;$[1=#ts:?o'x;,[;*ts];::](#x);!0]}
-/ show:{t:@x;$[|/`C`c`F`I`i`S`s=t;,`k@x;`A~t;hcat/box','`k'x;`nyi]}
-/ ashow:{$[`A~@x;$[1=#?@'x;matsh@,''`k''x;hcat/box'ashow'x];`k@x]}
-ashow:{$[`A~@x;$[1=#?@'x;matsh@o''x;hcat/box'ashow'x];,`k@x]}
-
+show:{$[`A~@x;$[(1=#?#'x)&(|/`I`F`A`S=*ts)&1=#ts:?@'x;matsh@o''x;matsh@,o'x];,`k@x]}/ gives a tile representing x
 
 
 / lim:{(x<ulen@y)(x#)/y}                                                            / adapt to ucode - avoid calculating str repr for big array
 
 
 
+/ -- BUGS ---------------------------------------
+/ `0:udd[repl.cols]'ashow (("ciao";"io");("sono";"nunzio");,44232324224)
 
 
 
