@@ -1,3 +1,4 @@
+dsep:"•▶▷○◇"![3]+3*4                                                                   / choice the separator for dicts
 in:{(z<y)&z>x}                                                                         / exclusive interval
 b2i:{x+256*0>x}                                                                        / byte(s) to int - solves issue about neg numbs w/ chars over 127
 ulen:+/~in[127;192]b2i@                                                                / length of utf8 str - discards data bytes and counts just initiators
@@ -14,17 +15,13 @@ hcat:{(-3_'x),'draw[-3#'x;3#'y],'(3_'y)}                                        
 vcat:{(-1_x),(,,/draw[0N 3#*|x;0N 3#*y]),1_y}                                          / see above
 
 matsh:{vcat/hcat/'box''mpad''[confsz@x;x]}                                             / accepts a matrix of char tiles
+dicsh:{A:+(,'`k@'!x;(#x)#,,dsep@0N,(!3),0N;,'`k'.x);vcat/box',',//'mpad''[confsz[A];A]}  / accepts a dict
 
 / shape:{$[|/`A`F`I`S=@x;$[1=#ts:?o'x;,[;*ts];::](#x);!0]}
 show:{$[`A~@x;$[(1=#?#'x)&(|/`I`F`A`S=*ts)&1=#ts:?@'x;matsh@o''x;matsh@,o'x];,`k@x]}   / gives a tile representing x
 
 
 / lim:{(x<ulen@y)(x#)/y}                                                            / adapt to ucode - avoid calculating str repr for big array
-
-
-
-/ -- BUGS ---------------------------------------
-/ `0:udd[repl.cols]'ashow (("ciao";"io");("sono";"nunzio");,44232324224)
 
 
 
@@ -46,3 +43,5 @@ C2:((C1;bs);(bs;C))
 C2:((C1;B);(B;C1))
 
 
+/ -- TODO ---------------
+/ make mpad centered
