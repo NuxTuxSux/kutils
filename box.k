@@ -15,7 +15,8 @@ hcat:{(-3_'x),'draw[-3#'x;3#'y],'(3_'y)}                                        
 vcat:{(-1_x),(,,/draw[0N 3#*|x;0N 3#*y]),1_y}                                          / see above
 
 matsh:{vcat/hcat/'box''mpad''[confsz@x;x]}                                             / accepts a matrix of char tiles
-dicsh:{A:+(,'`k@'!x;(#x)#,,dsep@0N,(!3),0N;,'`k'.x);vcat/box',',//'mpad''[confsz[A];A]}  / accepts a dict
+/ dicsh:{A:+(,'`k@'!x;(#x)#,,dsep@0N,(!3),0N;,'`k'.x);vcat/box',',//'mpad''[confsz[A];A]}  / accepts a dict
+dicsh:{A:+(x;(#x)#,,dsep@0N,(!3),0N;y);vcat/box',',//'mpad''[confsz[A];A]}
 
 / shape:{$[|/`A`F`I`S=@x;$[1=#ts:?o'x;,[;*ts];::](#x);!0]}
 show:{$[`A~@x;$[(1=#?#'x)&(|/`I`F`A`S=*ts)&1=#ts:?@'x;matsh@o''x;matsh@,o'x];,`k@x]}   / gives a tile representing x
