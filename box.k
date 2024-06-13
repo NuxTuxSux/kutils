@@ -15,33 +15,16 @@ hcat:{(-3_'x),'draw[-3#'x;3#'y],'(3_'y)}                                        
 vcat:{(-1_x),(,,/draw[0N 3#*|x;0N 3#*y]),1_y}                                          / see above
 
 matsh:{vcat/hcat/'box''mpad''[confsz@x;x]}                                             / accepts a matrix of char tiles
-/ dicsh:{A:+(,'`k@'!x;(#x)#,,dsep@0N,(!3),0N;,'`k'.x);vcat/box',',//'mpad''[confsz[A];A]}  / accepts a dict
-dicsh:{A:+(x;(#x)#,,dsep@0N,(!3),0N;y);vcat/box',',//'mpad''[confsz[A];A]}
+dicsh:{A:+(x;(#x)#,,dsep@0N,(!3),0N;y);vcat/box',/''+'mpad''[confsz[A];A]}
+
 
 / shape:{$[|/`A`F`I`S=@x;$[1=#ts:?o'x;,[;*ts];::](#x);!0]}
-show:{$[`A~@x;$[(1=#?#'x)&(|/`I`F`A`S=*ts)&1=#ts:?@'x;matsh@o''x;matsh@,o'x];,`k@x]}   / gives a tile representing x
+show:{$[`A~@x;$[(1=#?#'x)&(|/`I`F`A`S=*ts)&1=#ts:?@'x;matsh@o''x;matsh@,o'x];`m~@x;dicsh[o'!x;o'.x];,`k@x]}   / gives a tile representing x
 
 
 / lim:{(x<ulen@y)(x#)/y}                                                            / adapt to ucode - avoid calculating str repr for big array
 
 
-
-/ -- test data ----------------------------------
-
-A:(10#" "),`c$"A"+!26
-bs:+{3 4#100?A}@/:/:3 2#0
-
-a:,"3 4 5 9 8 4 3"
-b: ("0 1 2 3 4";"5 6 7 8 9")
-c: ("0 1";"2 3";"4 5")
-d: ("0 1 2 3";"4 5 6 7")
-M: ((,"3 4 5 9 8 4 3";("0 1 2 3 4";"5 6 7 8 9"));(("0 1";"2 3";"4 5");("0 1 2 3";"4 5 6 7")))
-
-B:vcat/hcat/'box''mpad''[confsz@bs;bs]
-C:((a;b);(c;d))
-C1:vcat/hcat/'box''mpad''[confsz@C;C]
-C2:((C1;bs);(bs;C))
-C2:((C1;B);(B;C1))
 
 
 / -- TODO ---------------
