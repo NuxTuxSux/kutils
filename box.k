@@ -5,7 +5,8 @@ ulen:+/~in[127;192]b2i@                                                         
 utake:{{z;(x+1)>+\~in[127;192]b2i@y}[x;y]#y}                                           / take x unicode chars from y - uses z for K combinator
 udd:{$[x<ulen@y;utake[x-2;y],"..";y]}                                                  / cut long unicode lines taking x uchar inserting ".."
 mshp:{(#x),ulen@*x}                                                                    / shape of a char matrix
-mpad:{(r;c):x-mshp@y;(y,\:c#" "),r#,(x@1)#" "}                                         / (right/down) space padding of a char matrix
+/ mpad:{(r;c):x-mshp@y;(y,\:c#" "),r#,(x@1)#" "}                                         / (right/down) space padding of a char matrix
+mpad:{s:mshp@y;p:{_%[;2]x-y}[x;s];?[(*x-s;x@1)#" ";p@0;?'[(*s;*|x-s)#" ";p@1;y]]}
 confsz:,/:\:/|/''{(*''x;+(*|)''x)}@mshp''                                              / gives conformed sizes for each tile in a tiles matrix
 cs:0N 3#"\0\0 \0\0r\0\0u╰\0\0l─╯┴\0\0d╭│├╮┬┤┼"                                         / line chrs put in the right order to enable bit-controlled superposition.
                                                                                        / In "(cs@2/) r u l d" r, u, l and d are the bits telling presence of each segmentlet
@@ -23,9 +24,3 @@ show:{$[`A~@x;$[(1=#?#'x)&(|/`I`F`A`S=*ts)&1=#ts:?@'x;matsh@o''x;matsh@,o'x];`m~
 
 
 / lim:{(x<ulen@y)(x#)/y}                                                            / adapt to ucode - avoid calculating str repr for big array
-
-
-
-
-/ -- TODO ---------------
-/ make mpad centered
