@@ -10,7 +10,7 @@
  mpad:{s:mshp@y;p:{_%[;2]x-y}[x;s];?[(*x-s;x@1)#" ";p@0;?'[(*s;*|x-s)#" ";p@1;y]]}                                     / centered space padding of a tile
  confsz:,/:\:/|/''{(*''x;+(*|)''x)}@mshp''                                                                             / gives conformed sizes for each tile in a tiles matrix
  cs:0N 3#"\0\0 \0\0r\0\0u╰\0\0l─╯┴\0\0d╭│├╮┬┤┼"                                                                        / line chrs put in the right order to enable bit-controlled superposition.
-                                                                                                                      / In "(cs@2/) r u l d" r, u, l and d are the bits telling presence of each segmentlet
+                                                                                                                       / In "(cs@2/) r u l d" r, u, l and d are the bits telling presence of each segmentlet
  box:{l:*[*|mshp@x;3]#"─";,/(,"╭",l,"╮";"│",/:x,\:"│";,"╰",l,"╯")}                                                     / draws a box around a chr matrix
  draw:{cs@2/|/+2\cs?/:(x;y)}                                                                                           / takes two borders vec giving their superposition
  hcat:{(-3_'x),'draw[-3#'x;3#'y],'(3_'y)}                                                                              / horizontally concat of two char matrices - superpose borders when needed
