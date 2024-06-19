@@ -23,7 +23,7 @@
 
  / shape:{$[|/`A`F`I`S=@x;$[1=#ts:?o'x;,[;*ts];::](#x);!0]}
  repr:{utake[repl.cols]'$[`A~@x;$[(1=#?#'x)&(|/`I`F`A`S=*ts)&1=#ts:?@'x;matsh@o''x;matsh@,o'x];`m~@x;dicsh[o'!x;o'.x];`M~@x;tabsh@x;,`k@x]}   / gives a tile representing x
- show:{`0:repr@x}
+ show:{`0:repr@x;}
 \d .
 
 
