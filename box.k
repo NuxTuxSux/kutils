@@ -21,7 +21,7 @@
  tablim:{$[x<#y;(-[x;1]#y),,#[*y]#,,"⋮";y]}                                                                            / limits a char matrix representing a table to x rows adding ⋮ when needed
  tabsh:{a:tablim[-5+repl.lines]@,''`k''(!x;@'.*x),+.x;mp:mpad''[confsz@a;a];vcat[hcat/box',/'+2#mp;hcat/{box@*'x}'+2_mp]}
 
-/ shape:{$[|/`A`F`I`S=@x;$[1=#ts:?o'x;,[;*ts];::](#x);!0]}
+ / shape:{$[|/`A`F`I`S=@x;$[1=#ts:?o'x;,[;*ts];::](#x);!0]}
  repr:{utake[repl.cols]'$[`A~@x;$[(1=#?#'x)&(|/`I`F`A`S=*ts)&1=#ts:?@'x;matsh@o''x;matsh@,o'x];`m~@x;dicsh[o'!x;o'.x];`M~@x;tabsh@x;,`k@x]}   / gives a tile representing x
  show:{`0:repr@x}
 \d .
