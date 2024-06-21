@@ -30,6 +30,7 @@ clt = accept(srv)
 running = true
 while running
     cmd, arg = JSON.parse(readline(clt))
+    println("-------------------------")
     println("cmd:\t$cmd")
     println("arg:\t$arg")
     res = nothing
@@ -43,7 +44,9 @@ while running
         # res = eval(Meta.parse("filter(s->any(isa.(getproperty($arg,s),[Function])),names($arg))"))
         res = eval(Meta.parse("filter(s->getproperty($arg,s) isa Function,names($arg))"))
     elseif cmd == "CLL"
-        res = eval(Meta.parse("$(arg[1])(nest($(repr(arg[2]))))"))
+        xss = join("nest(" .* repr.(arg[2]) .* ")",",")
+	println(xss)
+        res = eval(Meta.parse("$(arg[1])($xss)"))
     elseif cmd == "STP"
         global running
         res = "Bye"
