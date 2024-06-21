@@ -40,6 +40,7 @@ while running
     elseif cmd == "IMP"
         # do something when not properly called
         eval(Meta.parse("import $(arg)"))
+        # res = eval(Meta.parse("filter(s->any(isa.(getproperty($arg,s),[Function])),names($arg))"))
         res = eval(Meta.parse("filter(s->getproperty($arg,s) isa Function,names($arg))"))
     elseif cmd == "CLL"
         res = eval(Meta.parse("$(arg[1])(nest($(repr(arg[2]))))"))

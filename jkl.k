@@ -1,4 +1,4 @@
-\d JKL
+\d jkl
 
    pt: $31337
    env: !/+"="\'"\n"\`x(,"/usr/bin/env";"")                                                     /   we load the env dictionary to find $NGN_DIR, as
@@ -19,7 +19,8 @@
    fc: {[nm]{c(fn x;y)}[nm]}                                                                    /   julia function's "symbol path" (see above) -> k wrapper function
    i: {fc'nms!(,x),/:nms:`$C[`IMP]x}                                                            /   gives the package as a dict of k wrapper functions over its functions
 
-   flt: {$[^``i`f`c`s?@x;`f,o'x;x]}                                                             /   recursively flatten a list to make a multidimensional array for Julia
+   nst: {$[^``i`f`c`s?@x;`n,o'x;x]}                                                             /   array converter to julia. nested converter (`n) and rect converter (`r) - see jkl.jl
+   rct: {$[^``i`f`c`s?@x;`r,o'x;x]}
 
    st[]
    cn[]
