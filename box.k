@@ -4,7 +4,7 @@
  b2i: {x+256*0>x}                                                                                                                 / byte(s) to int - solves issue about neg numbs w/ chars over 127
  ulen: +/~in[127;192]b2i@                                                                                                         / length of utf8 str - discards data bytes and counts just initiators
 
- ucut: {#[y]^*&x<+\~box.in[127;192]box.b2i@y}
+ ucut: {#[y]^*&x<+\~box.in[127;192]box.b2i@y}                                                                                     / gives str index of x-th uchar 
 
  mshp: {(#x),ulen@*x}                                                                                                             / shape of a char matrix
  / mpad: {(r;c):x-mshp@y;(y,\:c#" "),r#,(x@1)#" "}                                                                                / (right/down) space padding of a tile (i.e. char matrix)
@@ -31,7 +31,5 @@ shw: {`0:$[`M~@x;{,[;"⋯"]#[;x]box.ucut[repl.cols-1]x}';box.scrspl]box.repr@x}
 
 / -------- BUGS --------
 / show@,,"hi!" and show@,"hi!" give the same boxed result
-
-/ -------- TODO --------
 
 
