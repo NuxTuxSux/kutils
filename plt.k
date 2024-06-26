@@ -1,7 +1,8 @@
 \d plt
 gppath: "/usr/local/bin/gnuplot"
 pre: "\$a<<E\n"
-menc: {("\n"/" "/'4$$+x),"\n"}
+menc: {("\n"/" "/'$+x),"\n"}
+/ menc: {("\n"/" "/'4$$+x),"\n"}
 post: {"\n"/("E";"plot \$a with ",x;"")}
 
 
