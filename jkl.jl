@@ -53,7 +53,7 @@ while running
         running = false
     end
     println(res)
-    write(clt, isnothing(res) ? "\n" : json(res) * "\n")
+    write(clt, isnothing(res) ? "null\n" : json(res) * "\n")
     flush(clt)
 end
 
