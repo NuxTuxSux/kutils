@@ -1,4 +1,4 @@
-#!/usr/local/bin/julia
+#!/usr/bin/env julia
 
 using Sockets, JSON
 const PORT = parse(Int, ARGS[1])
