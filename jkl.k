@@ -4,7 +4,7 @@
 /   env: !/+"="\'"\n"\`x(,"/usr/bin/env";"")                                                     /   we load the env dictionary to find $NGN_DIR, as
    
                                                                                                 /    kutils should be in the same folder as ngn/k
-   sp: (`env[]`"NGNK_DIR"),"/../kutils/server.sh"
+   sp: (`env[]`"NGNK_DIR"),"/../kutils/server.sh"11
    
    st: {`x(("/bin/bash";sp;pt);"");}
    cn: {jl:: (-1=){.[{."\\sleep 0.1";<x};`$":",pt;-1]}/ -1}                                    /   tries connecting to julia server every tenth of a second
