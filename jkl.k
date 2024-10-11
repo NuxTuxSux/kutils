@@ -7,7 +7,7 @@
    sp: (`env[]`"NGNK_DIR"),"/../kutils/server.sh"
    
    st: {`x(("/bin/bash";sp;pt);"");}
-   cn: {jl:: (-1=){.[{."\\sleep 0.1";;<x};`$":",pt;-1]}/ -1}                                    /   tries connecting to julia server every tenth of a second
+   cn: {jl:: (-1=){.[{."\\sleep 0.1";<x};`$":",pt;-1]}/ -1}                                    /   tries connecting to julia server every tenth of a second
 
    C: {jl 0:`j@(x;y); r:{$[#x;*x;x]}@0:jl; .[`j?;,r;{"Julia: ",r}]}                            /   try to condense I and O in the communication with Julia server
 
