@@ -27,12 +27,14 @@
 
  scrspl: *{#*x@1}{(ts;t):x;c:box.ucut[cols]'t;(ts,c#'t;c_'t)}/,[,();]@,:                                                     / split a tile to show it seq on the screen
  / shape: {$[|/`A`F`I`S=@x;$[1=#ts:?o'x;,[;*ts];::](#x);!0]}
- repr: {$[`A~@x;$[(1=#?#'x)&(|/`I`F`A`S=*ts)&1=#ts:?@'x;matsh@o''x;matsh@,o'x];`m~@x;dicsh[o'!x;o'.x];`M~@x;tabsh@x;,`k@x]}       / gives a tile representing x
+ repr: {$[(::)~x;,"";`A~@x;,$[(1=#?#'x)&(|/`I`F`A`S=*ts)&1=#ts:?@'x;matsh@o''x;matsh@,o'x];`m~@x;dicsh[o'!x;o'.x];`M~@x;,tabsh@x;,`k@x]}       / gives a tile representing x
+ shw:{box.upd[];$[`M~@x;{$[cols<ulen[x];((ucut[cols-1]@x)#x),"⋯";x]}'*:;scrspl]repr@x}
+
 \d .
 
-shw: {box.upd[];`0:$[`M~@x;{,[;"⋯"]#[;x]box.ucut[cols-1]x}';box.scrspl]box.repr@x}
+
 
 / -------- BUGS --------
-/ show@,,"hi!" and show@,"hi!" give the same boxed result
+/ shw@,,"hi!" and shw@,"hi!" give the same boxed result
 
 
