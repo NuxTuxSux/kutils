@@ -10,7 +10,7 @@ setts:setts,0x1b,"[2J",0x1b,"[0;0H"                                  / cls and p
 cs:{0x1b,"[48;5;",$[x],";38;5;",$[y],"m",,/$[z],0x1b,"[0m"}          / color string
 
 banner:setts,"ngn/k, (c) 2019-2024 ngn, GNU AGPLv3. type \\ for more info\n"
-prompt:," " /use 0x0720 for emacs integration
+prompt:"▷ " /use 0x0720 for emacs integration
 (opn;sem;cls):"(;)"
 / (opn;sem;cls):("( ";" ; ";" )") /uncomment this line for extra spacing
 lines:cols:999
@@ -35,7 +35,7 @@ basename:{*|"/"\x}
 dirname:{$[#x:"/"/-1_"/"\x;x;,"."]}
 joinpath:{$[x~,".";y;"/"~*|x;x,y;x,"/",y]}
 line0:{c:{0x07~*-2#*x}{(l;r):x;(1:1;r,,(-2_l))}/(x;());"\n"/(*|c),,*c}
-/ line1:{$[#x;;:0];x:-1_x;$[(3>#x)&("\\"=*x)&~^(!cmds)?x 1;cmds[x 1]x 1;.[`1:(fmt;fmtx)[" "~*x]@.:;,x;{`0:`err[]}]];`1:prompt;1}                             / orig ver - uncomment for std out
+/ line1:{$[#x;;:0];x:-1_x;$[(3>#x)&("\\"=*x)&~^(!cmds)?x 1;cmds[x 1]x 1;.[`1:(fmt;fmtx)[" "~*x]@.:;,x;{`0:`err[]}]];`1:prompt;1}                             / orig ver - uncomment for std out`!`!`!
 / line1:{$[#x;;:0];x:-1_x;$[(3>#x)&("\\"=*x)&~^(!cmds)?x 1;cmds[x 1]x 1;.[`1:,/,[;"\n"]'(box.shw;box.shw)[" "~*x]@.:;,x;{`0:`err[]}]];`1:prompt;1}           / old ver - guess no more needed
 line1:{$[#x;;:0];x:-1_x;$[(3>#x)&("\\"=*x)&~^(!cmds)?x 1;cmds[x 1]x 1;.[`1:,/,[;"\n"]'box.shw@.:;,x;{`0:`err[]}]];`1:prompt;1}
 
