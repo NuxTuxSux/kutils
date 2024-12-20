@@ -1,5 +1,5 @@
 # kutils
-This is a set of utilities I started to write for K ([ngn/k](https://codeberg.org/ngn/kgit)) in order to enhance its practical usability and hopefully make it more useful to who like me likes this great language. It currently consists of:
+This is a set of utilities I started to write for K ([ngn/k](https://codeberg.org/ngn/k)) in order to enhance its practical usability and hopefully make it more useful to who like me likes this great language. It currently consists of:
 
 ## box.k
 A library heavily inspired to ```]box``` mode from Dyalog APL interpreter and similar ones available for other array languages. I really like the way these utilities let the user look at the data structures in a natural way. Tough ngn/k (repl) has the advantage of showing data structures as valid k code, I like the experiece given by a more intuitive and "graphical" view. The main function is ```box.shw``` which implements rendering for the main structures, id est:
