@@ -31,4 +31,15 @@ This is an edited version of standard ```repl.k``` from ```ngn/k```. The main ch
 For some libraries the environment variable ```NGNK_DIR``` needs to be setted to the ```ngn/k``` folder path.
 
 # Screenshots
-`nyi
+![Matrices, vectors, boxing](imgs/A.png)
+![Matrices, dicts](imgs/B.png)
+![Tables](imgs/B1.png)
+![Dicts](imgs/C.png)
+![csv.k](imgs/iris1.png)
+![Column vector](imgs/iris2.png)
+![Dict](imgs/iris3.png)
+![Splitted vector](imgs/iris4.png)
+![Line plot - box.lns](imgs/lns.png)
+![Scatter - box.sct](imgs/sct.png)
+
+
