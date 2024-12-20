@@ -34,30 +34,41 @@ For some libraries the environment variable ```NGNK_DIR``` needs to be setted to
 
 # Screenshots
 ![Matrices, vectors, boxing](imgs/A.png)
+<br>
 Matrices, vectors, boxing
 ---
 ![Matrices, dicts](imgs/B.png)
+<br>
 Matrices, dicts
 ---
 ![Tables](imgs/B1.png)
+<br>
 Tables
 ---
 ![Dicts](imgs/C.png)
+<br>
 Dicts
 ---
 ![csv.k](imgs/iris1.png)
+<br>
 csv.k
 ---
 ![Column vector](imgs/iris2.png)
+<br>
 Column vector
 ---
 ![Dict](imgs/iris3.png)
+<br>
 Dict
+---
 ![Splitted vector](imgs/iris4.png)
+<br>
 Splitted vector
 ---
 ![Line plot - box.lns](imgs/lns.png)
+<br>
 Line plot - box.lns
 ---
 ![Scatter - box.sct](imgs/sct.png)
+<br>
 Scatter - box.sct
