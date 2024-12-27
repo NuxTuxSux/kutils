@@ -1,5 +1,5 @@
-/ › opt+shft+4
-/ · opt+sft+9
+/ › opt+shft+4   (on osx)
+/ · opt+shft+9
 / ∞ opt+5
 
 rR:{~^?[x+!y;z]}                                                 / in-range test

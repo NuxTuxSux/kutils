@@ -31,8 +31,12 @@
  
  mx: {&[1~#?@'x;1~#?#'x]}                                                                                                                   / tests if an array is a matrix
  smx: {|/`S`F`I`C=@*x}                                                                                                                      / tests if a matrix is a "scalar" matrix
+ smxsh: {x:,''`k''x;-1_',/',/'box.mpad''[0 1+/:/:box.confsz[x];x]}
  / repr: {$[(::)~x;,"";`A~@x;,$[(1=#?#'x)&(|/`I`F`A`S=*ts)&1=#ts:?@'x;matsh@o''x;matsh@,o'x];`m~@x;dicsh[o'!x;o'.x];`M~@x;,tabsh@x;,`k@x]}  / old version
- repr: {$[(::)~x;(); `m~@x;dicsh[o'!x;o'.x]; `M~@x;tabsh@x; `A~@x;$[1=#x;box@o@*x;mx@x;$[smx@x;`k'x;matsh@o''x];matsh@,o'x]; ,`k@x]}        / gives a tile representing x
+ / repr: {$[(::)~x;(); `m~@x;dicsh[o'!x;o'.x]; `M~@x;tabsh@x; `A~@x;$[1=#x;box@o@*x;mx@x;$[smx@x;`k'x;matsh@o''x];matsh@,o'x]; ,`k@x]}        / gives a tile representing x
+ / repr: {$[(::)~x;(); `m~@x;dicsh[o'!x;o'.x]; `M~@x;tabsh@x; `A~@x;$[1=#x;box@o@*x;mx@x;$[smx@x;{l:|/#'x;l$'x}@`k'x;matsh@o''x];matsh@,o'x]; ,`k@x]}        / gives a tile representing x
+ repr: {$[(::)~x;(); `m~@x;dicsh[o'!x;o'.x]; `M~@x;tabsh@x; `A~@x;$[1=#x;box@o@*x;mx@x;$[smx@x;smxsh@x;matsh@o''x];matsh@,o'x]; ,`k@x]}        / gives a tile representing x
+
 
 
  shw:{box.upd[];$[`M~@x;{$[cols<ulen[x];((ucut[cols-1]@x)#x),"⋯";x]}';scrspl]repr@x}
